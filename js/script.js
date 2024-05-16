@@ -9,10 +9,33 @@ fetch('https://randomuser.me/api/?results=12')
     .then(data => {
         userInfo = data;
         console.log(userInfo);
+        console.log(data.results);
+        displayEmployees(data.results);
+        // console.log(userInfo.results[0].name.first);
     })
-    .then(displayEmployees)
+    // .then(displayEmployees(userInfo))
     .catch(error => console.error(error));
 
-    function displayEmployees() {
+function displayEmployees(data) {
+    const container = document.getElementById('container');
 
-    }
+    data.map(user => {
+        console.log(user);
+        let i = 1;
+
+        container.innerHTML += `
+            <div class="card" data-index="${i}">
+                <div class="img-wrapper">
+                    <img class="avatar" src=${user.picture.medium}>
+                </div>
+                <div class="card-content">
+                    <h2>${user.name.first} ${user.name.last}</h2>
+                    <p>${user.email}</p>
+                    <p>${user.location.city}</p>
+                </div>
+            </div>
+        `
+
+        i ++;
+    })
+}
