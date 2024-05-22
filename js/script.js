@@ -5,7 +5,7 @@ const modalContent = document.querySelector('#modal-content');
 const modal = document.querySelector('.modal');
 const closeContainer = document.querySelector('.close-container');
 
-fetch('https://randomuser.me/api/?results=12')
+fetch('https://randomuser.me/api/?results=12&nat=us,ca')
     .then(response => {
         if(!response.ok) {
             throw new Error("Could not fetch resource");
@@ -40,6 +40,13 @@ function displayEmployees(data) {
         `
         i += 1;
     })
+
+    // animation added to all card elements
+    const cards = document.querySelectorAll('.card');
+    cards.forEach(card => {
+        let randomAniDelay = Math.floor(Math.random() * 500);
+        card.style.animation = `fadeIn 1s .${randomAniDelay}s ease forwards`;
+    });
 }
 
 
@@ -90,3 +97,43 @@ modal.addEventListener('click', e => {
         overlay.classList.add("hidden");
     }
 })
+
+//Search Functionality
+// if the text content of 'name' contains 'currentValue' then diplay flex (current property)
+// else hide the cards that do not match
+const searchBar = document.querySelector('#search');
+
+searchBar.addEventListener('keyup', e => {
+    let currentValue = e.target.value.toLowerCase();
+    let names = document.querySelectorAll('.card-content h2');
+    names.forEach(name => {
+        if (name.textContent.toLowerCase().includes(currentValue)) {
+            name.parentNode.parentNode.style.display = 'flex';
+        } else {
+            name.parentNode.parentNode.style.display = 'none';
+        }
+    });
+})
+
+// const cards = document.querySelectorAll('.card');
+// cards.forEach(card => {
+//     let randomAniDelay = Math.floor(Math.random() * 500);
+//     card.style.animation = `fadeIn 1s .${randomAniDelay}s ease forwards`;
+//     console.log('here');
+// });
+
+//Switching Modals
+// use arrow keys. if modal is open / not hidden. if right arrow key is pressed,
+// employeeInfo[index] +1 or if left arrow key is pressed employeeInfo[index] -1\
+
+// modal.addEventListener('keydown', e => {
+//     const card = target.closest(".card");
+//     const index = card.getAttribute("data-index");
+//     if (e.keyCode === 37) {
+//         console.log('left key pressed');
+//         displayModal(index - 1);
+//     }
+//     if (e.keyCode === 39) {
+//         console.log('right key pressed');
+//     }
+// })
