@@ -70,6 +70,8 @@ function displayModal(index) {
 
     overlay.classList.remove("hidden");
     modalContent.innerHTML = modalHTML;
+    // animation
+    // modal.style.animation = 'fadeIn 1s ease forwards';
     
 }
 
@@ -93,9 +95,19 @@ container.addEventListener('click', e => {
 // If user clicks on the x or it's container then overlay is set to hidden
 modal.addEventListener('click', e => {
     const target = e.target;
+    // const btnContainer = document.querySelector('.btn-container');
     if (closeContainer.contains(target)) {
         overlay.classList.add("hidden");
     }
+    // next and previous buttons
+    // if (btnContainer.contains(target)) {
+    //     if (btnContainer.childNodes.id === 'next') {
+    //         console.log('next');
+    //     }
+    //     if (btnContainer.childNodes.id === 'previous') {
+    //         console.log('previous');
+    //     }
+    // }
 })
 
 //Search Functionality
@@ -114,6 +126,20 @@ searchBar.addEventListener('keyup', e => {
         }
     });
 })
+
+
+//Switching Modals
+// const next = document.querySelector('#next');
+// const previous = document.querySelector('#previous');
+
+// next.addEventListener('click', e => {
+//     const cards = document.querySelectorAll('.card');
+//     cards.forEach(card => {
+//         const index = card.getAttribute("data-index");
+//         if (index === )
+//     })
+// })
+
 
 // const cards = document.querySelectorAll('.card');
 // cards.forEach(card => {
