@@ -4,6 +4,7 @@ const overlay = document.querySelector('.modal-container');
 const modalContent = document.querySelector('#modal-content');
 const modal = document.querySelector('.modal');
 const closeContainer = document.querySelector('.close-container');
+let currentIndex;
 
 fetch('https://randomuser.me/api/?results=12&nat=us,ca')
     .then(response => {
@@ -71,8 +72,9 @@ function displayModal(index) {
     overlay.classList.remove("hidden");
     modalContent.innerHTML = modalHTML;
     // animation
-    // modal.style.animation = 'fadeIn 1s ease forwards';
-    
+    modal.classList.add("apply-animation");
+
+    currentIndex = parseInt(index);
 }
 
 
@@ -88,6 +90,8 @@ container.addEventListener('click', e => {
         const index = card.getAttribute("data-index");
 
         displayModal(index);
+        // currentIndex = index;
+        console.log(currentIndex);
     }
 })
 
@@ -95,19 +99,51 @@ container.addEventListener('click', e => {
 // If user clicks on the x or it's container then overlay is set to hidden
 modal.addEventListener('click', e => {
     const target = e.target;
-    // const btnContainer = document.querySelector('.btn-container');
+    const nextButton = document.querySelector('#next');
+    const previousButton = document.querySelector('#previous');
+    const btnContainer = document.querySelector('.btn-container');
     if (closeContainer.contains(target)) {
         overlay.classList.add("hidden");
     }
     // next and previous buttons
-    // if (btnContainer.contains(target)) {
-    //     if (btnContainer.childNodes.id === 'next') {
-    //         console.log('next');
-    //     }
-    //     if (btnContainer.childNodes.id === 'previous') {
-    //         console.log('previous');
-    //     }
-    // }
+    if (nextButton.contains(target)) {
+        modal.classList.remove("apply-animation");
+        if (currentIndex >= 11) {
+            //disable button
+            console.log('previous');
+            console.log('button disabled');
+        } 
+        if (modal.classList === "apply-animation") {
+            modal.classList.remove("apply-animation");
+        } else {
+            console.log('next');
+            console.log(currentIndex);
+            displayModal(currentIndex + 1);
+            modal.classList.remove("apply-animation");
+            window.requestAnimationFrame(function() {
+                modal.classList.add("apply-animation");
+            })
+            
+            console.log(currentIndex);
+        }
+    }
+    if (previousButton.contains(target)) {
+        
+        if (currentIndex <= 0) {
+            console.log('previous');
+            console.log('button disabled');
+        } else {
+            console.log('previous');
+            console.log(currentIndex);
+            displayModal(currentIndex - 1);
+            modal.classList.remove("apply-animation");
+            window.requestAnimationFrame(function() {
+                modal.classList.add("apply-animation");
+            })
+            console.log(currentIndex);
+        }
+    }
+    // modal.style.removeProperty("animation");
 })
 
 //Search Functionality
@@ -128,25 +164,8 @@ searchBar.addEventListener('keyup', e => {
 })
 
 
-//Switching Modals
-// const next = document.querySelector('#next');
-// const previous = document.querySelector('#previous');
-
-// next.addEventListener('click', e => {
-//     const cards = document.querySelectorAll('.card');
-//     cards.forEach(card => {
-//         const index = card.getAttribute("data-index");
-//         if (index === )
-//     })
-// })
 
 
-// const cards = document.querySelectorAll('.card');
-// cards.forEach(card => {
-//     let randomAniDelay = Math.floor(Math.random() * 500);
-//     card.style.animation = `fadeIn 1s .${randomAniDelay}s ease forwards`;
-//     console.log('here');
-// });
 
 //Switching Modals
 // use arrow keys. if modal is open / not hidden. if right arrow key is pressed,
