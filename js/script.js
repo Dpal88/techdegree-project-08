@@ -71,8 +71,8 @@ function displayModal(index) {
 
     overlay.classList.remove("hidden");
     modalContent.innerHTML = modalHTML;
-    // animation
     modal.classList.add("apply-animation");
+    modal.focus(); //modal is focused upon opening, so arrow keys work instantly to navigate previous / next
 
     currentIndex = parseInt(index);
 }
@@ -90,60 +90,54 @@ container.addEventListener('click', e => {
         const index = card.getAttribute("data-index");
 
         displayModal(index);
-        // currentIndex = index;
-        console.log(currentIndex);
+        // console.log(currentIndex);
     }
 })
 
 
 // If user clicks on the x or it's container then overlay is set to hidden
+// If user clicks on previous or next arrows, then it will take the currentIndex
+// & add 1 to move forward or subtract 1 to move backwards.
 modal.addEventListener('click', e => {
     const target = e.target;
     const nextButton = document.querySelector('#next');
     const previousButton = document.querySelector('#previous');
-    const btnContainer = document.querySelector('.btn-container');
+
     if (closeContainer.contains(target)) {
         overlay.classList.add("hidden");
     }
-    // next and previous buttons
+
+    // next button
     if (nextButton.contains(target)) {
+
         modal.classList.remove("apply-animation");
         if (currentIndex >= 11) {
-            //disable button
-            console.log('previous');
             console.log('button disabled');
-        } 
-        if (modal.classList === "apply-animation") {
-            modal.classList.remove("apply-animation");
         } else {
             console.log('next');
-            console.log(currentIndex);
             displayModal(currentIndex + 1);
+
             modal.classList.remove("apply-animation");
             window.requestAnimationFrame(function() {
                 modal.classList.add("apply-animation");
             })
-            
-            console.log(currentIndex);
         }
     }
+    // previous button
     if (previousButton.contains(target)) {
         
         if (currentIndex <= 0) {
-            console.log('previous');
             console.log('button disabled');
         } else {
             console.log('previous');
-            console.log(currentIndex);
             displayModal(currentIndex - 1);
+
             modal.classList.remove("apply-animation");
             window.requestAnimationFrame(function() {
                 modal.classList.add("apply-animation");
             })
-            console.log(currentIndex);
         }
     }
-    // modal.style.removeProperty("animation");
 })
 
 //Search Functionality
@@ -168,17 +162,41 @@ searchBar.addEventListener('keyup', e => {
 
 
 //Switching Modals
-// use arrow keys. if modal is open / not hidden. if right arrow key is pressed,
-// employeeInfo[index] +1 or if left arrow key is pressed employeeInfo[index] -1\
+// If left arrow key is pressed, the displayModal function runs and takes the currentIndex paramater -1,
+// & vice versa for the right arrow key
+// If the escape key is pressed overlay is set to hidden
 
-// modal.addEventListener('keydown', e => {
-//     const card = target.closest(".card");
-//     const index = card.getAttribute("data-index");
-//     if (e.keyCode === 37) {
-//         console.log('left key pressed');
-//         displayModal(index - 1);
-//     }
-//     if (e.keyCode === 39) {
-//         console.log('right key pressed');
-//     }
-// })
+modal.addEventListener('keydown', e => {
+    if (e.key === "ArrowLeft") {
+
+        if (currentIndex <= 0) {
+            console.log('button disabled');
+        } else {
+            console.log('left key pressed');
+            displayModal(currentIndex - 1);
+
+            modal.classList.remove("apply-animation");
+            window.requestAnimationFrame(function() {
+                modal.classList.add("apply-animation");
+            })
+        }
+    }
+    if (e.key === "ArrowRight") {
+
+        if (currentIndex >= 11) {
+            console.log('button disabled');
+        } else {
+            console.log('right key pressed');
+            displayModal(currentIndex + 1);
+
+            modal.classList.remove("apply-animation");
+            window.requestAnimationFrame(function() {
+                modal.classList.add("apply-animation");
+            })
+        }
+    }
+
+    if (e.key === "Escape") {
+        overlay.classList.add("hidden");
+    }
+})

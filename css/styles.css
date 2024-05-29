@@ -165,35 +165,20 @@ p {
 }
 
 /* ----------- Switching Modals ----------- */
-/* .modal::after {
-    content: "&#129094;";
-}
-span {
-    position: absolute;
-    top: 150px;
-    left: 400px;
-    font-size: 40px;
-    color: #E5E4E2;
-    background: #A9A9A9;
-    cursor: pointer;
-    vertical-align: middle;
-} */
 
 .btn-container {
     position: absolute;
 }
 #next {
     position: absolute;
-    /* bottom: 200px;
-    left: 350px; */
     top: 100px;
     left: 350px;
     background: #fff;
     height: 60px;
     width: 60px;
     border-radius: 50%;
-    transition: 0.4s ease;
     cursor: pointer;
+    transition: 0.4s ease;
 }
 #next:hover,
 #previous:hover {
@@ -212,16 +197,14 @@ span {
 }
 #previous {
     position: absolute;
-    /* bottom: 200px;
-    right: 20px; */
     top: 100px;
     right: 20px;
     background: #fff;
     height: 60px;
     width: 60px;
     border-radius: 50%;
-    transition: 0.4s ease;
     cursor: pointer;
+    transition: 0.4s ease;
 }
 
 #previous div {
