@@ -10,7 +10,7 @@ body {
 
 .main-heading {
     text-align: center;
-    max-width: 1000px;
+    max-width: 1100px;
     padding: 0 10px;
     margin: 40px auto 20px auto;
 }
@@ -21,7 +21,7 @@ h1 {
 }
 
 .container {
-    max-width: 1000px;
+    max-width: 1100px;
     padding: 0 10px;
     margin: auto;
     display: grid;
@@ -44,7 +44,8 @@ h1 {
 }
 
 .card-content {
-    overflow: hidden;
+    /* overflow: hidden; */
+    word-break: break-word;
 }
 h2 {
     font-size: 18px;
@@ -72,8 +73,6 @@ p {
     justify-content: center;
     grid-template-columns: minmax(auto, 350px);
     z-index: 1;
-
-    /* display: none; */
 }
 .hidden {
     display: none;
@@ -100,7 +99,6 @@ p {
 }
 #close {
     color: black;
-    /* font-weight: bold; */
 }
 #close:hover {
     cursor: pointer;
@@ -143,8 +141,14 @@ p {
 }
 
 @keyframes pop-in {
-    0% { opacity: 0; transform: scale(0.9); }
-    100% { opacity: 1; transform: scale(1); }
+    0% { 
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    100% { 
+        opacity: 1;
+        transform: scale(1);
+    }
 }
 .apply-animation {
     animation: pop-in .4s linear;
@@ -169,50 +173,41 @@ p {
 .btn-container {
     position: absolute;
 }
-#next {
+#next, #previous {
     position: absolute;
     top: 100px;
-    left: 350px;
     background: #fff;
     height: 60px;
     width: 60px;
     border-radius: 50%;
     cursor: pointer;
     transition: 0.4s ease;
+}
+#next {
+    left: 350px;
+}
+#previous {
+    right: 20px;
 }
 #next:hover,
 #previous:hover {
     box-shadow: 0px 0px 10px 10px rgba(0, 0, 0, 0.353);
 }
-#next div {
+#next div, #previous div {
     position: relative;
     height: 30px;
     width: 30px;
     border-top: 6px solid black;
     border-left: 6px solid black;
+}
+#next div {
     transform: rotate(130deg);
     left: 10px;
     top: 15px;
 
 }
-#previous {
-    position: absolute;
-    top: 100px;
-    right: 20px;
-    background: #fff;
-    height: 60px;
-    width: 60px;
-    border-radius: 50%;
-    cursor: pointer;
-    transition: 0.4s ease;
-}
 
 #previous div {
-    position: relative;
-    height: 30px;
-    width: 30px;
-    border-top: 6px solid black;
-    border-left: 6px solid black;
     transform: rotate(-45deg);
     left: 20px;
     top: 15px;
